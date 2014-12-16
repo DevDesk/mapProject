@@ -13,8 +13,8 @@
         greater than "top-navbar{height}" */
 
     #map-content {
-        position:absolute;
-        right:400px;
+        position:fixed;
+        right:500px;
         left:0px;
         height:auto;
         padding:0px;
@@ -23,10 +23,10 @@
     }
     #right-sidebar {
         background-color: #F8F8F8;
-        position:absolute;
+        position:fixed;
         overflow-y:scroll;
         right:0px;
-        width:400px;
+        width:500px;
         height:auto;
         padding-left:10px;
         top:53px;
@@ -47,6 +47,13 @@
 /*    html,
     body,  */
     #map-canvas { 
+        height: 100%; 
+        top:0px;
+        bottom:0px;
+        margin: 0px; 
+        padding: 0px;
+    }
+    #map { 
         height: 100%; 
         top:0px;
         bottom:0px;
