@@ -1,0 +1,55 @@
+/*    body {
+        margin: 0 0 0 0;
+        background-color: #797979;*/
+        /*overflow: hidden;*/
+/*    }*/
+    #page-wrap {
+/*        background: white;*/
+        max-width: 100%;
+    }
+
+    /* "main-content{right}" should match "right-sidebar{width}"
+        "main-content{top}" & "right-sidebar{top} should be
+        greater than "top-navbar{height}" */
+
+    #map-content {
+        position:absolute;
+        right:400px;
+        left:0px;
+        height:auto;
+        padding:0px;
+        top:53px;
+        bottom:0px;
+    }
+    #right-sidebar {
+        background-color: #F8F8F8;
+        position:absolute;
+        overflow-y:scroll;
+        right:0px;
+        width:400px;
+        height:auto;
+        padding-left:10px;
+        top:53px;
+        bottom:0px;
+    }
+    #top-navbar {
+        background-color: #FFFFFF;
+        position:fixed;
+        top:0px;
+        left:0px;
+        right:0px;
+        height:53px;
+    }
+    .navbar-button {
+        margin-top:10px;
+    }
+
+/*    html,
+    body,  */
+    #map-canvas { 
+        height: 100%; 
+        top:0px;
+        bottom:0px;
+        margin: 0px; 
+        padding: 0px;
+    }

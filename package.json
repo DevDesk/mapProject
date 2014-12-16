@@ -1,0 +1,32 @@
+{
+  "name": "mapProject",
+  "version": "1.0.0",
+  "description": "mapProject ==========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DevDesk/mapProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevDesk/mapProject/issues"
+  },
+  "homepage": "https://github.com/DevDesk/mapProject",
+  "dependencies": {
+    "bcrypt": "^0.8.0",
+    "body-parser": "^1.10.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^1.0.0",
+    "express": "^4.10.6",
+    "express-session": "^1.9.3",
+    "pg": "^4.1.1",
+    "request": "^2.51.0",
+    "sequelize": "^2.0.0-rc3",
+    "sequelize-cli": "^0.3.3",
+    "us": "^1.0.3"
+  }
+}

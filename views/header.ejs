@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<title>	</title>
+
+		<link href="/styles.css" rel="stylesheet" type="text/css">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+
+		<!-- map info -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/script.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+
+      <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.gMap%>">
+      </script>
+      <script type="text/javascript">
+        function initialize() {
+          var mapOptions = {
+            center: { lat: -34.397, lng: 150.644},
+            zoom: 8
+          };
+          var map = new google.maps.Map(document.getElementById('map-canvas'),
+              mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+      </script>
+
+	</head>
+<body>
