@@ -30,21 +30,29 @@ app.get("/collapse", function(req,res){
 	res.render("collapse");
 });
 
-// app.get("/siteForm", function(req,res){
-// 	var stateList = us.states;
-// 	var stateListKey = Object.keys(stateList);
-// 	// res.send(Object.keys(stateList));
-// 	res.render("siteForm",{stateListKey:stateListKey});
-// });
 
 //userAuth
 //create custom middleware step 1
 app.use(function(req, res, next){
+
+
+	/////////////////////// AUTO LOGIN DELETE LATER
+	req.session.user = {
+		id:23,   //id of user (only part that matters)
+		email: 's@w.com',
+		firstName: 'steve',
+		lastName: 'w',
+		userName: 'sw'
+	};
+	//////////////////////////////////////////////////
+
 	req.getUser = function(){
 		return req.session.user || false;
 	}
 	next();
 })
+
+
 
 //userAuth
 //below could use app.use to apply middleware(route) to all app.get / app.post / etc.
@@ -68,7 +76,7 @@ app.get("/search", function(req,res){
 	});
 })
 
-
+//fills drop down menu on home page with list of States
 app.get("/", function(req,res){
 	var stateList = us.states;
 	var stateListKey = Object.keys(stateList);
@@ -142,15 +150,11 @@ app.post("/auth/register", function(req,res){
 		// res.send(error.errors)
 		res.redirect('/register');
 	});
-	// user is signed up forward them to the home page
-	// res.redirect('/');
 });
 
 
 app.post("/auth/login", function(req,res){
-	// res.send(req.body);
 	db.user.find({where:{email: req.body.loginEmail}}).then(function(userObj){
-		// res.send(req.body.loginEmail);
 		if(userObj){
 			bcrypt.compare(req.body.loginPassword, userObj.password, function (err, match){
 				if (match === true) {
@@ -162,114 +166,84 @@ app.post("/auth/login", function(req,res){
 						userName: userObj.userName
 					};
 					res.redirect("/");
-					// res.send("correct password");
 				} else {
-					// res.send("invalid password");
 					req.flash("danger", "invalid password");
 					res.redirect("/incorrectLogin");
 				}
 			})
-			// res.send("User found ... check password")
 		} else {
-			// res.send("User not found");
 			req.flash("danger", "User not found");
 			res.redirect("/incorrectLogin");
 		}
 	});
-	// res.redirect("/");
+});
+
+app.post("/submit/site", function(req, res){
+	var currentUser = req.session.user;
+	// res.sendStatus(currentUser.id);
+	db.user.find({where:{id: currentUser.id}}).then(function(userObj){
+		// res.sendStatus(currentUser.id);
+
+		var siteData = {
+			userId:currentUser.id,
+			siteName:req.body.siteName,
+			// siteRef:req.body.siteRef,
+			image:req.body.image,
+			address1:req.body.address1,
+			address2:req.body.address2,
+			city:req.body.city,
+			state:req.body.state,
+			zip:req.body.zip,
+			county:req.body.county,
+			// longitude:req.body.longitude,
+			// latitude:req.body.latitude,
+			siteUrl:req.body.siteUrl,
+			siteNotes:req.body.siteNotes
+		};
+		//DATES CANNOT BE EMPTY STRINGS
+		if(req.body.dateVisited){
+			siteData.dataVisited=new Date(req.body.dateVisited).toString();
+		}
+
+		//GET LAT AND LNG IF WE HAVE AN ADDRESS
+		if(req.body.address1 && req.body.city && req.body.state && req.body.zip){
+			var fullAddress = req.body.address1 + ' ' + req.body.city + ', '+ req.body.state + ' ' + req.body.zip;
+			geocoder.geocode(fullAddress, function( err, data) {
+				if(data.results && data.results.length > 0){
+					siteData.latitude = data.results[0].geometry.location.lat;
+					siteData.longitude = data.results[0].geometry.location.lng;					
+					saveSiteToDatabase();
+				}else{
+					saveSiteToDatabase();
+				}
+			});			
+		}else{
+			saveSiteToDatabase();
+		}
+
+		//FUNCTION TO SAVE OBJECT DATA ABOVE TO DATABASE
+		var saveSiteToDatabase = function(){
+			db.site.create(siteData).then(function(postData){
+				res.redirect('/');
+			});
+		}
+
+
+	});
+	
+	// .then(function(){
+	// 	res.send({userId:id});	
+	// });
+
+	// .then(function(user){
+	// 	user.createSite({userId:user,}).then(function(){
+	// 		res.render
+	// 	})
+	// })
 });
 
 
-
-
-// //userAuth - working
-// app.get('/',function(req,res){
-//     var user = req.getUser();
-//     // res.send(req.flash());
-//     // var alerts = req.flash();
-//     res.render('index',{user:user});
-//     // removed from line above and added to app.get('*') alerts above
-//     // , alerts:alerts
-// });
-
-// //userAuth - in Modal of root, don't need to launch extra pg?
-// //login form
-// app.get('/login',function(req,res){
-//     res.render('login');
-// });
-
-// //userAuth  -- need help: how to redirect to Modal
-// app.post('/login',function(req,res){
-//     //do login here (check password and set session value)
-
-//     //user is logged in forward them to the home page
-//     // res.send(req.body);
-//     db.user.find({where:{email: req.body.email}}).then(function(userObj){
-//         if(userObj){
-//             bcrypt.compare(req.body.password, userObj.password, function (err, match){
-//                 if (match === true) {
-//                     //store user object in session
-//                     req.session.user = {
-//                         id: userObj.id,
-//                         email: userObj.email,
-//                         name: userObj.name
-//                     };
-//                     res.redirect("/");
-//                     // res.send("correct password");
-//                 } else {
-//                     // res.send("invalid password");
-//                     req.flash("danger", "invalid password");
-//                     res.redirect("/login");
-//                 }
-//             })
-//             // res.send("User found... check password")
-//         } else {
-//             // res.send("User not found");
-//             req.flash("danger", "User not found");
-//             res.redirect("/login");
-//         }
-//     });
-//     // res.redirect('/');
-// });
-
-// //userAuth
-// //sign up form
-// app.get('/auth/signup',function(req,res){
-//     res.render('signup');
-// });
-
-// //userAuth
-// app.post('/auth/signup',function(req,res){
-//     //do sign up here (add user to database)
-//     db.user.findOrCreate(
-//         {
-//             where: {email: req.body.email},
-//             defaults: {email: req.body.email, password: req.body.password, name: req.body.name}
-//         }
-//     ).spread(function (user, created) {
-//         res.send(user)
-//             // res.send({signUpData:data, wasCreated: created});
-//     }).catch(function(error){
-//         if(error && Array.isArray(error.errors)){
-//             // res.send(Array.isArray(error.errors));
-//             // res.send(error.errors);
-//             error.errors.forEach(function(errorItem){
-//                 req.flash('danger',errorItem.message);
-//             });
-//         }else{
-//             req.flash('danger','unknown error');
-//         }
-//         // res.send(error.errors)
-//         res.redirect('/auth/signup');
-//     });
-
-//     //user is signed up forward them to the home page
-//     // res.redirect('/');
-// });
-
-// //userAuth
-// //logout
-// //sign up form
+// //userAuth - Logout
 app.get('/auth/logout',function(req,res){
     // res.send('logged out');
     delete req.session.user;
@@ -278,18 +252,4 @@ app.get('/auth/logout',function(req,res){
 });
 
 
-
-//testing US from NPM to get States in USA
-// app.get('/siteForm',function(req,res){
-// 	var stateList = us.states;
-// 	// var newArray = [];
-// 		// for ( var i = 0; i < stateList.length; i++){
-// 			// for (var state in stateList){
-// 				// newArray.push(stateList[i]);
-// 				// res.send(newArray);
-// 			// }
-// 			res.send(Object.keys(stateList));
-// 		// }
-// 	}
-// );
 app.listen(process.env.PORT || 3000);
