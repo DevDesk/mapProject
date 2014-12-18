@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 	<html lang="en">
+	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	<head>
+	
 		<title>	</title>
 
-		<link href="/styles.css" rel="stylesheet" type="text/css">
+		
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/styles.css" rel="stylesheet" type="text/css">
+ <!--     	<link href="/datepicker.css" rel="stylesheet" type="text/css"> -->
 
 
 		<!-- map info -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/script.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<!-- <script type="text/javascript" src="/bootstrap-datepicker.js"></script> -->
 
+		<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.gMap%>">
+		</script>
 
-      <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.gMap%>">
-      </script>
-
-
-
-      <script type="text/javascript">
-        function initialize() {
-          var mapOptions = {
-            center: { lat: 47.6201451, lng: -122.3298646},
-            zoom: 7
-          };
-          var map = new google.maps.Map(document.getElementById('map-canvas'),
-              mapOptions);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-      </script>
+		<!-- load javascript file containing google map info -->
+		<script type="text/javascript" src="/script.js"></script>
+		<script type="text/javascript" src="/map.js"></script>
 
 	</head>
 <body>
+
+

@@ -1,0 +1,132 @@
+
+<!-- DATES -->
+<form class="form-details" role="form" method="post" action="/submit/site">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-xs-12">
+                    <button type="submit" class="btn pull-right btn-default">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-4">
+                    <label for="createdAt">Date Added</label>
+                    <input type="date" class="form-control" id="createdAt" placeholder="MM-DD-YYYY">
+            </div>
+            <div class="form-group col-xs-4">
+                <label for="updatedAt">Last Modified</label>
+                <input type="date" class="form-control" id="updatedAt" placeholder="MM-DD-YYYY">
+            </div>
+            <div class="form-group col-xs-4">
+                <label for="dateVisited">Visited</label>
+                <input type="date" class="form-control" id="dateVisited" placeholder="MM-DD-YYYY">
+            </div>
+        </div>
+        <!--SITE NAME / SITE REF -->
+        <div class="row">
+            <div class="form-group col-xs-9">
+                <label class="sr-only" for="siteName">Site Name</label>
+                <input type="text" class="form-control" id="siteName" placeholder="Name your site">
+            </div>
+            <div class="form-group col-xs-3">
+                <label class="sr-only" for="siteRef">Reference</label>
+                <input type="text" class="form-control" id="siteRef" placeholder="Reference #">
+            </div>
+        </div>
+        <div class="row">
+            <!-- ADDRESS INFO -->
+            <div class="form-group col-xs-6">
+                <label class="sr-only" for="country">Country</label>
+                <select type="text" class="form-control" id="country" placeholder="Country">
+                    <option>USA</option>
+                    <option>Canada</option>
+                    <option>Mexico</option>
+                </select>
+            </div>
+            <div class="form-group col-xs-6">
+                <label class="sr-only" for="image">Upload Image</label>
+                <input type="text" class="form-control" id="image" placeholder="Upload Image">
+            </div>
+        </div>
+                                                                <hr>
+        <!-- Master Row - Parent Nested Column -->
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="sr-only" for="address1">Address Line 1</label>
+                        <input type="text" class="form-control" id="address1" placeholder="Address Line 1">
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="form-group col-xs-12">
+                        <label class="sr-only" for="address2">Address Line 2</label>
+                        <input type="text" class="form-control" id="address2" placeholder="Address Line 2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="sr-only" for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="City">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="sr-only" for="state">State</label>
+                        <select type="text" class="form-control" id="state" placeholder="State">
+                            <% for(var i=0; i<stateListKey.length;i++){%>
+                            <option><%=stateListKey[i]%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label class="sr-only" for="zip">Zipcode</label>
+                        <input type="text" class="form-control" id="zip" placeholder="Zipcode">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="sr-only" for="county">County</label>
+                        <input type="text" class="form-control" id="county" placeholder="County">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        This is where image will go
+                    </div>
+                </div>
+            </div>
+
+        </div>  <!--CLOSES Master Row of Nexted Columns -->
+
+                                                                <hr>
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <label class="sr-only" for="longitude">Longitude</label>
+                <input type="text" class="form-control" id="longitude" placeholder="Longitude">
+            </div> 
+            <div class="form-group col-xs-6">
+                <label class="sr-only" for="latitude">Latitude</label>
+                <input type="text" class="form-control" id="latitude" placeholder="Latitude">
+            </div>
+        </div>   
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label class="sr-only" for="siteUrl">Website URL</label>
+                <input type="url" class="form-control" id="siteUrl" placeholder="Property's Website">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label class="sr-only" for="siteNotes">Site Notes</label>
+                <textarea class="form-control" rows="5" id="siteNotes" placeholder="Site Notes"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" class="btn pull-right btn-default">Submit</button>
+            </div>
+        </div>
+    </div>   
+</form>

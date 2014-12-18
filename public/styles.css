@@ -11,41 +11,8 @@
     /* "main-content{right}" should match "right-sidebar{width}"
         "main-content{top}" & "right-sidebar{top} should be
         greater than "top-navbar{height}" */
-
-    #map-content {
-        position:fixed;
-        right:500px;
-        left:0px;
-        height:auto;
-        padding:0px;
-        top:53px;
-        bottom:0px;
-    }
-    #right-sidebar {
-        background-color: #F8F8F8;
-        position:fixed;
-        overflow-y:scroll;
-        right:0px;
-        width:500px;
-        height:auto;
-        padding-left:10px;
-        top:53px;
-        bottom:0px;
-    }
-    #top-navbar {
-        background-color: #FFFFFF;
-        position:fixed;
-        top:0px;
-        left:0px;
-        right:0px;
-        height:53px;
-    }
-    .navbar-button {
-        margin-top:10px;
-    }
-
-/*    html,
-    body,  */
+    html,
+    body,  
     #map-canvas { 
         height: 100%; 
         top:0px;
@@ -60,3 +27,96 @@
         margin: 0px; 
         padding: 0px;
     }
+    #map-content {
+        position:fixed;
+        right:600px;
+        left:0px;
+        height:auto;
+        padding:0px;
+        top:53px;
+        bottom:0px;
+        z-index:55;
+ /*       z-index:-1;*/
+    }
+    #right-sidebar {
+        background-color: #F8F8F8;
+        position:fixed;
+        overflow-y:scroll;
+        right:0px;
+        width:600px;
+        height:auto;
+        padding-left:10px;
+        top:53px;
+        bottom:0px;
+        /*z-index:-1;*/
+    }
+    #top-navbar {
+        background-color: #FFFFFF;
+        position:fixed;
+        top:0px;
+        left:0px;
+        right:0px;
+        height:53px;
+        z-index: 222;
+    }
+
+    .navbar-button {
+        margin-top:10px;
+    }
+    .btn-right {
+        text-align:right;
+    }
+    .form-inline {
+        padding:5px;
+    }
+    .form-inline > * {
+        margin:5px 3px !important;
+    }
+    .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .form-group {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .ztopzz {
+        position:relative !important;
+        z-index:99999 !important;
+    }
+    .alert {
+        text-align:center;
+        padding: 10px;
+        margin: 10px;
+    }
+
+@media screen and (max-width: 1075px) {
+    #map-content {
+        right: 487px;
+    }
+    #right-sidebar {
+        width: 487px;
+    }
+}
+@media screen and (max-width: 975px) {
+    #map-content {
+        right: 430px;
+    }
+    #right-sidebar {
+        width: 430px;
+    }
+}
+@media screen and (max-width: 475px) {
+    #map-content {
+        right: 390px;
+    }
+    #right-sidebar {
+        width: 390px;
+    }
+}

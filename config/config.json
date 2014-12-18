@@ -1,0 +1,21 @@
+{
+  "development": {
+    "database": "mapDb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "mapDb_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "mapDb_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

@@ -1,0 +1,18 @@
+//req.body.address (or whatever you called this field)
+
+geocoder.geocode(req.body.address, function( err, data) {
+
+	req.body.latitude = data.results[0].geometry.location.lat;
+	req.body.longitude = data.results[0].geometry.location.lng;
+
+	db.sites.create(req.body).then(function(site){
+		//res.render or redirect
+	});
+});
+
+
+
+
+
+
+    var map = mapInit(<%= lat %>, <%= lng %> );

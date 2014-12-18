@@ -1,0 +1,24 @@
+<% include header%>
+
+<% include alerts %>
+        <form class="form-inline" role="form" method="post" action="/auth/login" align="center">
+          <div class="container-fluid">
+          <h3> Existing User Login: </h3>
+            <div class="form-group">
+              <div class="input-group">
+                <label class="sr-only" for="loginEmail">Email address</label>
+                <div class="input-group-addon">@</div>
+                <input type="email" class="form-control" id="loginEmail" name="loginEmail"placeholder="Enter email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="loginPassword">Password</label>
+              <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password">
+            </div>
+            <button type="submit" value="log me in" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+
+        <hr>
+
+<% include footer %>

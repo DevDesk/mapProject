@@ -1,0 +1,28 @@
+<% include header %>
+<div class="page-wrap">
+    <div id="top-navbar">
+<% include navbar %>
+    </div>
+    <div id="map-content">
+        <div id="map-canvas">
+        </div>
+    </div>
+<% include login %>
+    <div id="sidebar">
+    </div>
+    <div id="right-sidebar">
+<% include rightPanel %>
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+<% include footer %>
+
+
+<script>
+
+    var map = mapInit(47.6201451, -122.3298646);
+    
+    mapAddMarker(map, 47.6201451, -122.3298646,"this is my title");
+
+</script>
