@@ -1,56 +1,29 @@
 
 <table class="table table-hover">
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>Name</th>
-			<th>City</th>
-			<th>State</th>
-			<th>Zip</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>1</td>
-			<td>Leavenworth-downtown</td>
-			<td>Leavenworth</td>
-			<td>WA</td>
-			<td>98111</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>3rd Ave & Pike St</td>
-			<td>Seattle</td>
-			<td>WA</td>
-			<td>98001</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>Leavenworth-downtown</td>
-			<td>Leavenworth</td>
-			<td>WA</td>
-			<td>98111</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>3rd Ave & Pike St</td>
-			<td>Seattle</td>
-			<td>WA</td>
-			<td>98001</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>Leavenworth-downtown</td>
-			<td>Leavenworth</td>
-			<td>WA</td>
-			<td>98111</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>3rd Ave & Pike St</td>
-			<td>Seattle</td>
-			<td>WA</td>
-			<td>98001</td>
-		</tr>
-	</tbody>
+	<%if(sites){
+	for(var i=0; i<sites.length;i++){%>                           
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip</th>
+			</tr>
+		</thead>
+		<tbody>
+					<tr>
+						<td><%=sites[i].siteRef%></td>
+						<td><%=sites[i].siteName%></td>
+						<td><%=sites[i].city%></td>
+						<td><%=sites[i].state%></td>
+						<td><%=sites[i].zip%></td>
+					</tr>
+				<%}
+			} else {%>
+					<tr>
+						<td>Please Register or Login to Save Sites</td>
+					</tr>
+			<%}%>
+		</tbody>
 </table>					

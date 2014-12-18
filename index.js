@@ -37,13 +37,13 @@ app.use(function(req, res, next){
 
 
 	/////////////////////// AUTO LOGIN DELETE LATER
-	req.session.user = {
-		id:23,   //id of user (only part that matters)
-		email: 's@w.com',
-		firstName: 'steve',
-		lastName: 'w',
-		userName: 'sw'
-	};
+	// req.session.user = {
+	// 	id:23,   //id of user (only part that matters)
+	// 	email: 's@w.com',
+	// 	firstName: 'steve',
+	// 	lastName: 'w',
+	// 	userName: 'sw'
+	// };
 	//////////////////////////////////////////////////
 
 	req.getUser = function(){
@@ -81,8 +81,19 @@ app.get("/", function(req,res){
 	var stateList = us.states;
 	var stateListKey = Object.keys(stateList);
 	var user = req.getUser();
-	res.render('index',{user:user,stateListKey:stateListKey});
-	// res.render("index",{stateListKey:stateListKey});
+	var currentUser = req.session.user;
+	//User is false when logged out
+	//currentUser is undefined when logged out
+	if(user === false || currentUser === 'undefined'){
+		res.render('index',{user:false,stateListKey:stateListKey,sites:false})
+	} else {
+		db.user.find(currentUser).then(function(returnedUser){
+			returnedUser.getSites().then(function(postData){
+				res.render('index',{user:user,stateListKey:stateListKey,sites:postData});
+			})	
+		// res.render("index",{stateListKey:stateListKey});
+		})
+	}
 });
 
 app.get("/rightPanel", function(req,res){
@@ -181,66 +192,68 @@ app.post("/auth/login", function(req,res){
 app.post("/submit/site", function(req, res){
 	var currentUser = req.session.user;
 	// res.sendStatus(currentUser.id);
-	db.user.find({where:{id: currentUser.id}}).then(function(userObj){
-		// res.sendStatus(currentUser.id);
+	// console.log(currentUser);
+	if(currentUser === undefined){
+		req.flash("danger", "Register or Login to Save Sites!");
+		res.redirect('/');
+	} else {
+		db.user.find({where:{id: currentUser.id}}).then(function(userObj){
+			// res.sendStatus(currentUser.id);
 
-		var siteData = {
-			userId:currentUser.id,
-			siteName:req.body.siteName,
-			// siteRef:req.body.siteRef,
-			image:req.body.image,
-			address1:req.body.address1,
-			address2:req.body.address2,
-			city:req.body.city,
-			state:req.body.state,
-			zip:req.body.zip,
-			county:req.body.county,
-			// longitude:req.body.longitude,
-			// latitude:req.body.latitude,
-			siteUrl:req.body.siteUrl,
-			siteNotes:req.body.siteNotes
-		};
-		//DATES CANNOT BE EMPTY STRINGS
-		if(req.body.dateVisited){
-			siteData.dataVisited=new Date(req.body.dateVisited).toString();
-		}
+			var siteData = {
+				userId:currentUser.id,
+				siteName:req.body.siteName,
+				// siteRef:req.body.siteRef,
+				image:req.body.image,
+				address1:req.body.address1,
+				address2:req.body.address2,
+				city:req.body.city,
+				state:req.body.state,
+				zip:req.body.zip,
+				county:req.body.county,
+				// longitude:req.body.longitude,
+				// latitude:req.body.latitude,
+				siteUrl:req.body.siteUrl,
+				siteNotes:req.body.siteNotes
+			};
+			//DATES CANNOT BE EMPTY STRINGS
+			if(req.body.dateVisited){
+				siteData.dataVisited=new Date(req.body.dateVisited).toString();
+			}
 
-		//GET LAT AND LNG IF WE HAVE AN ADDRESS
-		if(req.body.address1 && req.body.city && req.body.state && req.body.zip){
-			var fullAddress = req.body.address1 + ' ' + req.body.city + ', '+ req.body.state + ' ' + req.body.zip;
-			geocoder.geocode(fullAddress, function( err, data) {
-				if(data.results && data.results.length > 0){
-					siteData.latitude = data.results[0].geometry.location.lat;
-					siteData.longitude = data.results[0].geometry.location.lng;					
-					saveSiteToDatabase();
-				}else{
-					saveSiteToDatabase();
-				}
-			});			
-		}else{
-			saveSiteToDatabase();
-		}
+			//GET LAT AND LNG IF WE HAVE AN ADDRESS
+			if(req.body.address1 && req.body.city && req.body.state && req.body.zip){
+				var fullAddress = req.body.address1 + ' ' + req.body.city + ', '+ req.body.state + ' ' + req.body.zip;
+				geocoder.geocode(fullAddress, function( err, data) {
+					if(data.results && data.results.length > 0){
+						siteData.latitude = data.results[0].geometry.location.lat;
+						siteData.longitude = data.results[0].geometry.location.lng;					
+						saveSiteToDatabase();
+					}else{
+						saveSiteToDatabase();
+					}
+				});			
+			}else{
+				saveSiteToDatabase();
+			}
 
-		//FUNCTION TO SAVE OBJECT DATA ABOVE TO DATABASE
-		var saveSiteToDatabase = function(){
-			db.site.create(siteData).then(function(postData){
-				res.redirect('/');
-			});
-		}
-
-
-	});
-	
-	// .then(function(){
-	// 	res.send({userId:id});	
-	// });
-
-	// .then(function(user){
-	// 	user.createSite({userId:user,}).then(function(){
-	// 		res.render
-	// 	})
-	// })
+			//FUNCTION TO SAVE OBJECT DATA ABOVE TO DATABASE
+			var saveSiteToDatabase = function(){
+				db.site.create(siteData).then(function(postData){
+					res.redirect('/');
+				});
+			}
+		})
+	}
 });
+
+// app.get('/saved/sites', function (req, res) {
+// 	$('savedSites a').click(function (e) {
+// 	  e.preventDefault()
+// 	  $(this).tab('show');
+// 	  console.log(getUser());
+// 	})
+// })
 
 
 // //userAuth - Logout
