@@ -1,7 +1,7 @@
 
 <table class="table table-hover">
-	<%if(sites){
-	for(var i=0; i<sites.length;i++){%>                           
+	<%if(sites){%>
+                           
 		<thead>
 			<tr>
 				<th>#</th>
@@ -12,6 +12,7 @@
 			</tr>
 		</thead>
 		<tbody>
+	<%for(var i=0; i<sites.length;i++){%>
 					<tr>
 						<td><%=sites[i].siteRef%></td>
 						<td><%=sites[i].siteName%></td>
@@ -19,11 +20,51 @@
 						<td><%=sites[i].state%></td>
 						<td><%=sites[i].zip%></td>
 					</tr>
-				<%}
-			} else {%>
+
+
+				<%}%>
+		</tbody>
+</table>
+	<div class="container-fluid">
+		<div class="row">
+			<button type="submit" class="btn pull-right btn-default">Show Sites on Map</button>
+		</div>
+	</div>
+
+<script>
+
+  // var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+  // var mapOptions = {
+  //   zoom: 4,
+  //   center: myLatlng
+  // }
+  // var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  // var marker = new google.maps.Marker({
+  //     position: myLatlng,
+  //     map: map,
+  //     title: 'Hello World!'
+  // });
+
+
+
+    // var map = mapInit(47.6201451, -122.3298646);
+    
+    // mapAddMarker(map, 47.6201451, -122.3298646,"this is my title");
+
+
+</script>
+
+
+
+		<%} else {%>
+			<table>
+				<tbody>
 					<tr>
 						<td>Please Register or Login to Save Sites</td>
 					</tr>
-			<%}%>
-		</tbody>
-</table>					
+
+				</tbody>
+			</table>
+		<%}%>
+			

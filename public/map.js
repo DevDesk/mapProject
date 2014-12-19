@@ -17,6 +17,7 @@ function mapAddMarker(map,lat,lng,title){
 		title: title
 	});
 }
+
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 
