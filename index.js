@@ -203,7 +203,7 @@ app.post("/submit/site", function(req, res){
 			var siteData = {
 				userId:currentUser.id,
 				siteName:req.body.siteName,
-				// siteRef:req.body.siteRef,
+				siteRef:req.body.siteRef,
 				image:req.body.image,
 				address1:req.body.address1,
 				address2:req.body.address2,

@@ -12,7 +12,7 @@ module.exports = {
         type: DataTypes.STRING
       },
       siteRef: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
       },
       image: {
         type: DataTypes.STRING
@@ -39,10 +39,10 @@ module.exports = {
         type: DataTypes.STRING
       },
       longitude: {
-        type: DataTypes.INTEGER
+        type: DataTypes.FLOAT
       },
       latitude: {
-        type: DataTypes.INTEGER
+        type: DataTypes.FLOAT
       },
       siteUrl: {
         type: DataTypes.TEXT
