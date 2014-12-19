@@ -9,14 +9,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <img src="/img/logo.png" alt="some_text">
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/map">Map <span class="sr-only">(current)</span></a></li>
-        <li><a href="/rightPanel">Right Panel</a></li>
+<!--       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -29,12 +27,12 @@
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
-      </ul>
+      </ul> -->
       <form class="navbar-form navbar-left" role="search" action="/search" method="get">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search for Any Address" name="searchAddress">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search for Any Address" name="searchAddress">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
       <% if(user){ %>
