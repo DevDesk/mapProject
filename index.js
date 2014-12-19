@@ -87,7 +87,8 @@ app.get("/", function(req,res){
 	if(user === false || currentUser === 'undefined'){
 		res.render('index',{user:false,stateListKey:stateListKey,sites:false})
 	} else {
-		db.user.find(currentUser).then(function(returnedUser){
+		// res.send(currentUser);
+		db.user.find({where: {id: currentUser.id}}).then(function(returnedUser){
 			returnedUser.getSites().then(function(postData){
 				res.render('index',{user:user,stateListKey:stateListKey,sites:postData});
 			})	
@@ -230,11 +231,14 @@ app.post("/submit/site", function(req, res){
 						siteData.longitude = data.results[0].geometry.location.lng;					
 						saveSiteToDatabase();
 					}else{
-						saveSiteToDatabase();
+						req.flash('danger','No results found');
+						res.redirect('/');
 					}
 				});			
 			}else{
-				saveSiteToDatabase();
+				req.flash('danger','Need to enter full address')
+				res.redirect('/');
+				// saveSiteToDatabase();
 			}
 
 			//FUNCTION TO SAVE OBJECT DATA ABOVE TO DATABASE
